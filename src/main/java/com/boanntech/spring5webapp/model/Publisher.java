@@ -2,6 +2,8 @@ package com.boanntech.spring5webapp.model;
 
 import javax.persistence.Entity;
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Publisher {
@@ -15,6 +17,10 @@ public class Publisher {
     private String city;
     private String county;
     private String eircode;
+
+    @OneToMany
+    @JoinColumn(name = "publisher_id")
+    private Set<Book> books = new HashSet<>();
 
     public Publisher() {
     }
@@ -82,6 +88,14 @@ public class Publisher {
 
     public void setEircode(String eircode) {
         this.eircode = eircode;
+    }
+
+    public Set<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(Set<Book> books) {
+        this.books = books;
     }
 
     @Override
